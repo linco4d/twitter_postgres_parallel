@@ -1,26 +1,29 @@
-#!/bin/bash
+#!/bin/sh
 
-files=$(find data/*)
+set -e
 
-echo '================================================================================'
+files=$(find data -maxdepth 1 -type f -name '*.zip' | sort)
+
+NORMALIZED_DB='postgresql://postgres:pass@localhost:1076/postgres'
+DENORMALIZED_DB='postgresql://postgres:pass@localhost:1981/postgres'
+NORMALIZED_BATCH_DB='postgresql://postgres:pass@localhost:1982/postgres'
+
+echo 'load normalized'
+for file in $files; do
+    echo "$file"
+    python3 load_tweets.py --db "$NORMALIZED_DB" --inputs "$file"
+done
+
 echo 'load denormalized'
-echo '================================================================================'
-time for file in $files; do
-    echo
-    # copy your solution to the twitter_postgres assignment here
+for file in $files; do
+    echo "$file"
+    unzip -p "$file" \
+      | python3 -c "import sys; [sys.stdout.write(line.replace(r'\\u0000', '')) for line in sys.stdin]" \
+      | psql "$DENORMALIZED_DB" -c "\copy tweets_jsonb(data) FROM STDIN WITH (FORMAT csv, DELIMITER E'\t', QUOTE E'\b')"
 done
 
-echo '================================================================================'
-echo 'load pg_normalized'
-echo '================================================================================'
-time for file in $files; do
-    echo
-    # copy your solution to the twitter_postgres assignment here
-done
-
-echo '================================================================================'
-echo 'load pg_normalized_batch'
-echo '================================================================================'
-time for file in $files; do
-    python3 -u load_tweets_batch.py --db=postgresql://postgres:pass@localhost:3/ --inputs $file
+echo 'load normalized batch'
+for file in $files; do
+    echo "$file"
+    python3 -u load_tweets_batch.py --db "$NORMALIZED_BATCH_DB" --inputs "$file"
 done
