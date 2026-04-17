@@ -1,0 +1,124 @@
+data/geoTwitter21-01-01.zip
+2026-04-16 21:46:11.830883 data/geoTwitter21-01-01.zip
+2026-04-16 21:46:12.560260 insert_tweets i= 0
+2026-04-16 21:46:13.678198 insert_tweets i= 1
+2026-04-16 21:46:14.353049 insert_tweets i= 2
+2026-04-16 21:46:14.998885 insert_tweets i= 3
+2026-04-16 21:46:15.432915 insert_tweets i= 4
+2026-04-16 21:46:16.099415 insert_tweets i= 5
+2026-04-16 21:46:16.779613 insert_tweets i= 6
+2026-04-16 21:46:17.485930 insert_tweets i= 7
+2026-04-16 21:46:17.936130 insert_tweets i= 8
+2026-04-16 21:46:18.651346 insert_tweets i= 9
+data/geoTwitter21-01-02.zip
+2026-04-16 21:46:20.440582 data/geoTwitter21-01-02.zip
+2026-04-16 21:46:21.174292 insert_tweets i= 0
+2026-04-16 21:46:22.271395 insert_tweets i= 1
+2026-04-16 21:46:22.919397 insert_tweets i= 2
+2026-04-16 21:46:23.584744 insert_tweets i= 3
+2026-04-16 21:46:24.273604 insert_tweets i= 4
+2026-04-16 21:46:24.725019 insert_tweets i= 5
+2026-04-16 21:46:25.421581 insert_tweets i= 6
+2026-04-16 21:46:26.147446 insert_tweets i= 7
+2026-04-16 21:46:26.603367 insert_tweets i= 8
+2026-04-16 21:46:27.337509 insert_tweets i= 9
+data/geoTwitter21-01-03.zip
+2026-04-16 21:46:29.495091 data/geoTwitter21-01-03.zip
+2026-04-16 21:46:30.213041 insert_tweets i= 0
+2026-04-16 21:46:31.343391 insert_tweets i= 1
+2026-04-16 21:46:32.015186 insert_tweets i= 2
+2026-04-16 21:46:32.680912 insert_tweets i= 3
+2026-04-16 21:46:33.370151 insert_tweets i= 4
+2026-04-16 21:46:33.889149 insert_tweets i= 5
+2026-04-16 21:46:34.565636 insert_tweets i= 6
+2026-04-16 21:46:35.232724 insert_tweets i= 7
+2026-04-16 21:46:35.672071 insert_tweets i= 8
+2026-04-16 21:46:36.391474 insert_tweets i= 9
+data/geoTwitter21-01-04.zip
+2026-04-16 21:46:38.504466 data/geoTwitter21-01-04.zip
+2026-04-16 21:46:39.226167 insert_tweets i= 0
+2026-04-16 21:46:40.296493 insert_tweets i= 1
+2026-04-16 21:46:40.990681 insert_tweets i= 2
+2026-04-16 21:46:41.641144 insert_tweets i= 3
+2026-04-16 21:46:42.072504 insert_tweets i= 4
+2026-04-16 21:46:42.695585 insert_tweets i= 5
+2026-04-16 21:46:43.372901 insert_tweets i= 6
+2026-04-16 21:46:44.042423 insert_tweets i= 7
+2026-04-16 21:46:44.498120 insert_tweets i= 8
+2026-04-16 21:46:45.185474 insert_tweets i= 9
+data/geoTwitter21-01-05.zip
+2026-04-16 21:46:47.206653 data/geoTwitter21-01-05.zip
+2026-04-16 21:46:47.958905 insert_tweets i= 0
+2026-04-16 21:46:49.095359 insert_tweets i= 1
+2026-04-16 21:46:49.762831 insert_tweets i= 2
+2026-04-16 21:46:50.421031 insert_tweets i= 3
+2026-04-16 21:46:51.095439 insert_tweets i= 4
+2026-04-16 21:46:51.543239 insert_tweets i= 5
+2026-04-16 21:46:52.230768 insert_tweets i= 6
+2026-04-16 21:46:52.944082 insert_tweets i= 7
+2026-04-16 21:46:53.407175 insert_tweets i= 8
+2026-04-16 21:46:54.140038 insert_tweets i= 9
+data/geoTwitter21-01-06.zip
+2026-04-16 21:46:56.342687 data/geoTwitter21-01-06.zip
+2026-04-16 21:46:57.089218 insert_tweets i= 0
+2026-04-16 21:46:58.233330 insert_tweets i= 1
+2026-04-16 21:46:58.915448 insert_tweets i= 2
+2026-04-16 21:46:59.567796 insert_tweets i= 3
+2026-04-16 21:47:00.253596 insert_tweets i= 4
+2026-04-16 21:47:00.718035 insert_tweets i= 5
+2026-04-16 21:47:01.572270 insert_tweets i= 6
+2026-04-16 21:47:02.269485 insert_tweets i= 7
+2026-04-16 21:47:02.725243 insert_tweets i= 8
+2026-04-16 21:47:03.451083 insert_tweets i= 9
+data/geoTwitter21-01-07.zip
+2026-04-16 21:47:05.609349 data/geoTwitter21-01-07.zip
+2026-04-16 21:47:06.365780 insert_tweets i= 0
+2026-04-16 21:47:07.491406 insert_tweets i= 1
+2026-04-16 21:47:08.158713 insert_tweets i= 2
+2026-04-16 21:47:08.818524 insert_tweets i= 3
+2026-04-16 21:47:09.488918 insert_tweets i= 4
+2026-04-16 21:47:09.938209 insert_tweets i= 5
+2026-04-16 21:47:10.619183 insert_tweets i= 6
+2026-04-16 21:47:11.320842 insert_tweets i= 7
+2026-04-16 21:47:11.757899 insert_tweets i= 8
+2026-04-16 21:47:12.472545 insert_tweets i= 9
+data/geoTwitter21-01-08.zip
+2026-04-16 21:47:14.268203 data/geoTwitter21-01-08.zip
+2026-04-16 21:47:15.010886 insert_tweets i= 0
+2026-04-16 21:47:16.180331 insert_tweets i= 1
+2026-04-16 21:47:16.883584 insert_tweets i= 2
+2026-04-16 21:47:17.511620 insert_tweets i= 3
+2026-04-16 21:47:18.179287 insert_tweets i= 4
+2026-04-16 21:47:18.628349 insert_tweets i= 5
+2026-04-16 21:47:19.319812 insert_tweets i= 6
+2026-04-16 21:47:20.041947 insert_tweets i= 7
+2026-04-16 21:47:20.506183 insert_tweets i= 8
+2026-04-16 21:47:21.215299 insert_tweets i= 9
+data/geoTwitter21-01-09.zip
+2026-04-16 21:47:23.070083 data/geoTwitter21-01-09.zip
+2026-04-16 21:47:23.851863 insert_tweets i= 0
+2026-04-16 21:47:24.980268 insert_tweets i= 1
+2026-04-16 21:47:25.647389 insert_tweets i= 2
+2026-04-16 21:47:26.299293 insert_tweets i= 3
+2026-04-16 21:47:26.975375 insert_tweets i= 4
+2026-04-16 21:47:27.400259 insert_tweets i= 5
+2026-04-16 21:47:28.079607 insert_tweets i= 6
+2026-04-16 21:47:28.796213 insert_tweets i= 7
+2026-04-16 21:47:29.241964 insert_tweets i= 8
+2026-04-16 21:47:29.974050 insert_tweets i= 9
+data/geoTwitter21-01-10.zip
+2026-04-16 21:47:31.770921 data/geoTwitter21-01-10.zip
+2026-04-16 21:47:32.484567 insert_tweets i= 0
+2026-04-16 21:47:33.599560 insert_tweets i= 1
+2026-04-16 21:47:34.241811 insert_tweets i= 2
+2026-04-16 21:47:34.915015 insert_tweets i= 3
+2026-04-16 21:47:35.590615 insert_tweets i= 4
+2026-04-16 21:47:36.029425 insert_tweets i= 5
+2026-04-16 21:47:36.687619 insert_tweets i= 6
+2026-04-16 21:47:37.245180 insert_tweets i= 7
+2026-04-16 21:47:37.997613 insert_tweets i= 8
+2026-04-16 21:47:38.714990 insert_tweets i= 9
+
+real	1m28.697s
+user	1m12.500s
+sys	0m2.967s

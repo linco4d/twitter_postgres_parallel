@@ -1,0 +1,24 @@
+data/geoTwitter21-01-01.zip
+COPY 10000
+data/geoTwitter21-01-02.zip
+COPY 10000
+data/geoTwitter21-01-03.zip
+COPY 10000
+data/geoTwitter21-01-04.zip
+COPY 10000
+data/geoTwitter21-01-05.zip
+COPY 10000
+data/geoTwitter21-01-06.zip
+COPY 10000
+data/geoTwitter21-01-07.zip
+COPY 10000
+data/geoTwitter21-01-08.zip
+COPY 10000
+data/geoTwitter21-01-09.zip
+COPY 10000
+data/geoTwitter21-01-10.zip
+COPY 10000
+
+real	0m14.437s
+user	0m4.731s
+sys	0m1.611s

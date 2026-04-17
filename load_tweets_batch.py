@@ -38,33 +38,6 @@ def remove_nulls(s):
         return s.replace('\x00','\\x00')
 
 
-def get_id_urls(url):
-    '''
-    Given a url, returns the corresponding id in the urls table.
-    If no row exists for the url, then one is inserted automatically.
-    '''
-    sql = sqlalchemy.sql.text('''
-    insert into urls 
-        (url)
-        values
-        (:url)
-    on conflict do nothing
-    returning id_urls
-    ;
-    ''')
-    res = connection.execute(sql,{'url':url}).first()
-    if res is None:
-        sql = sqlalchemy.sql.text('''
-        select id_urls 
-        from urls
-        where
-            url=:url
-        ''')
-        res = connection.execute(sql,{'url':url}).first()
-    id_urls = res[0]
-    return id_urls
-
-
 def batch(iterable, n=1):
     '''
     Group an iterable into batches of size n.
@@ -138,7 +111,6 @@ def _bulk_insert_sql(table, rows):
         '''
         )
 
-
     binds = { key+str(i):value for i,row in enumerate(rows) for key,value in row.items() }
     return (' '.join(sql.split()), binds)
 
@@ -185,10 +157,6 @@ def _insert_tweets(connection,input_tweets):
     and so should not be called directly by end users.
     '''
 
-    # each of these lists will contain dictionaries that represent the rows to be inserted into the table;
-    # the function is divided up into two steps;
-    # in the first step, we loop over the input batch and construct the lists;
-    # in the second step, we actually insert the lists.
     users = []
     tweets = []
     users_unhydrated_from_tweets = []
@@ -206,19 +174,14 @@ def _insert_tweets(connection,input_tweets):
         ########################################
         # insert into the users table
         ########################################
-        if tweet['user']['url'] is None:
-            user_id_urls = None
-        else:
-            user_id_urls = get_id_urls(tweet['user']['url'])
-
         users.append({
             'id_users':tweet['user']['id'],
             'created_at':tweet['user']['created_at'],
             'updated_at':tweet['created_at'],
+            'url':tweet['user']['url'],
             'screen_name':remove_nulls(tweet['user']['screen_name']),
             'name':remove_nulls(tweet['user']['name']),
             'location':remove_nulls(tweet['user']['location']),
-            'id_urls':user_id_urls,
             'description':remove_nulls(tweet['user']['description']),
             'protected':tweet['user']['protected'],
             'verified':tweet['user']['verified'],
@@ -234,7 +197,6 @@ def _insert_tweets(connection,input_tweets):
         ########################################
 
         try:
-            geo_coords = tweet['geo']['coordinates']
             geo_coords = str(tweet['geo']['coordinates'][0]) + ' ' + str(tweet['geo']['coordinates'][1])
             geo_str = 'POINT'
         except TypeError:
@@ -277,19 +239,12 @@ def _insert_tweets(connection,input_tweets):
         except TypeError:
             place_name = None
 
-        # NOTE:
-        # The tweets table has the following foreign key:
-        # > FOREIGN KEY (in_reply_to_user_id) REFERENCES users(id_users)
-        #
-        # This means that every "in_reply_to_user_id" field must reference a valid entry in the users table.
-        # If the id is not in the users table, then you'll need to add it in an "unhydrated" form.
         if tweet.get('in_reply_to_user_id',None) is not None:
             users_unhydrated_from_tweets.append({
                 'id_users':tweet['in_reply_to_user_id'],
                 'screen_name':tweet['in_reply_to_screen_name'],
                 })
 
-        # insert the tweet
         tweets.append({
             'id_tweets':tweet['id'],
             'id_users':tweet['user']['id'],
@@ -322,10 +277,9 @@ def _insert_tweets(connection,input_tweets):
             urls = tweet['entities']['urls']
 
         for url in urls:
-            id_urls = get_id_urls(url['expanded_url'])
             tweet_urls.append({
                 'id_tweets':tweet['id'],
-                'id_urls':id_urls,
+                'url':url['expanded_url'],
                 })
 
         ########################################
@@ -381,37 +335,26 @@ def _insert_tweets(connection,input_tweets):
                 media = []
 
         for medium in media:
-            id_urls = get_id_urls(medium['media_url'])
             tweet_media.append({
                 'id_tweets':tweet['id'],
-                'id_urls':id_urls,
+                'url':medium['media_url'],
                 'type':medium['type']
                 })
 
     ######################################## 
     # STEP 2: perform the actual SQL inserts
     ######################################## 
-    with connection.begin() as trans:
 
-        # use the bulk_insert function to insert most of the data
-        bulk_insert(connection, 'users', users)
-        bulk_insert(connection, 'users', users_unhydrated_from_tweets)
-        bulk_insert(connection, 'users', users_unhydrated_from_mentions)
-        bulk_insert(connection, 'tweet_mentions', tweet_mentions)
-        bulk_insert(connection, 'tweet_tags', tweet_tags)
-        bulk_insert(connection, 'tweet_media', tweet_media)
-        bulk_insert(connection, 'tweet_urls', tweet_urls)
+    bulk_insert(connection, 'users', users)
+    bulk_insert(connection, 'users', users_unhydrated_from_tweets)
+    bulk_insert(connection, 'users', users_unhydrated_from_mentions)
+    bulk_insert(connection, 'tweet_mentions', tweet_mentions)
+    bulk_insert(connection, 'tweet_tags', tweet_tags)
+    bulk_insert(connection, 'tweet_media', tweet_media)
+    bulk_insert(connection, 'tweet_urls', tweet_urls)
 
-        # the tweets data cannot be inserted using the bulk_insert function because
-        # the geo column requires special SQL code to generate the column;
-        #
-        # NOTE:
-        # in general, it is a good idea to avoid designing tables that require special SQL on the insertion;
-        # it makes your python code much more complicated,
-        # and is also bad for performance;
-        # I'm doing it here just to help illustrate the problems
-        sql = sqlalchemy.sql.text('''
-        INSERT INTO tweets
+    sql = sqlalchemy.sql.text('''
+    INSERT INTO tweets
             (id_tweets,id_users,created_at,in_reply_to_status_id,in_reply_to_user_id,quoted_status_id,geo,retweet_count,quote_count,favorite_count,withheld_copyright,withheld_in_countries,place_name,country_code,state_code,lang,text,source)
             VALUES
             '''
@@ -422,12 +365,11 @@ def _insert_tweets(connection,input_tweets):
             ON CONFLICT DO NOTHING
             '''
             )
-        res = connection.execute(sql, { key+str(i):value for i,tweet in enumerate(tweets) for key,value in tweet.items() })
+    res = connection.execute(sql, { key+str(i):value for i,tweet in enumerate(tweets) for key,value in tweet.items() })
 
 
 if __name__ == '__main__':
 
-    # process command line args
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--db',required=True)
@@ -435,16 +377,11 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size',type=int,default=1000)
     args = parser.parse_args()
 
-    # create database connection
     engine = sqlalchemy.create_engine(args.db, connect_args={
         'application_name': 'load_tweets.py --inputs '+' '.join(args.inputs),
         })
     connection = engine.connect()
 
-    # loop through file
-    # NOTE:
-    # we reverse sort the filenames because this results in fewer updates to the users table,
-    # which prevents excessive dead tuples and autovacuums
     with connection.begin() as trans:
         for filename in sorted(args.inputs, reverse=True):
             with zipfile.ZipFile(filename, 'r') as archive: 
